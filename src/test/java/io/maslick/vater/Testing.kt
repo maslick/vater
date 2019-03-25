@@ -1,5 +1,6 @@
 package io.maslick.vater
 
+import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
@@ -20,12 +21,15 @@ class Testing {
     @Test
     fun testRest() {
         val body = rest.getEntry().execute().body()
-        println(body)
+        Assert.assertEquals(28, body!!.rates.size)
     }
 
     @Test
     fun testService() {
         service.get3Highest().forEach { println(it) }
         service.get3Lowest().forEach { println(it) }
+
+        Assert.assertEquals(3, service.get3Highest().size)
+        Assert.assertEquals(3, service.get3Lowest().size)
     }
 }
